@@ -9,14 +9,18 @@ int main() {
 		printf("1.nhap vao so phan tu va gia tri cua mang\n");
 		printf("2.in ra gia tri cua cac phan tu mang\n");
 		printf("3.dem so luong cac so nguyen to co trong mang\n");
-		printf("4.tim gia tri nho thu hai trong mang\n");
-		printf("5.them mot phan tu vao vi tri ngau nhien trong mang, phan tu them va vi tri do nguoi dung nhap\n");
-		printf("6.xoa mot phan tu tai vi tri cu the\n");
-		printf("7.xap xep mang theo thu tu giam dan(insertion short)\n");
-		printf("8.yeu cau nguoi dung nhap vao mot phan tu kiem tra phan tu do co trong mang khong(Binary search)\n");
-		printf("9.xoa toan bo phan tu trung lap trong mang, hien thi toan bo phan tu doc nhat co trong mang\n");
-		printf("10.dao thu tu cac phan tu co trong mang\n");
-		printf("11.thoat\n");
+		printf("4.dem so luong so hoan hao\n");
+		printf("5.tim gia tri nho thu hai trong mang\n");
+		printf("6.tim gia tri lon thu hai trong mang\n");
+		printf("7.them mot phan tu vao vi tri ngau nhien trong mang, phan tu them va vi tri do nguoi dung nhap\n");
+		printf("8.xoa mot phan tu tai vi tri cu the\n");
+		printf("9.xap xep mang theo thu tu giam dan(insertion short)\n");
+		printf("10.xap xep mang theo thu tu tang dan(insertion short)\n");
+		printf("11.yeu cau nguoi dung nhap vao mot phan tu kiem tra phan tu do co trong mang khong(Binary search)\n");
+		printf("12.xoa toan bo phan tu trung lap trong mang, hien thi toan bo phan tu doc nhat co trong mang\n");
+		printf("13.dao nguoc mang\n");
+		printf("14.xap xep mang so chan dung truoc so le dung sau\n");
+		printf("15.thoat\n");
 		printf("moi bang nhap lua chon: ");
 		scanf("%d",&luachon);
         switch (luachon) {
@@ -77,16 +81,33 @@ int main() {
                 }
                 break;
             }
-            case 4: {
+            case 4:{
+            	if (n == 0) {
+                    printf("Mang chua duoc nhap! nhap lai\n");
+                }else{
+                	     int count = 0;
+                    printf("Cac so hoan hao trong mang la: ");
+                    for (int i = 0; i < n; i++) {
+                        int sum = 0;
+                        for (int j = 1; j <= a[i] / 2; j++) {
+                            if (a[i] % j == 0) {
+                                sum += j;
+                            }
+                        }
+                        if (sum == a[i] && a[i] != 0) {
+                            printf("%d ", a[i]);
+                            count++;
+                        }
+				}
+				break;
+			}
+            case 5: {
                 if (n == 0) {
                     printf("Mang chua duoc nhap! nhap lai\n");
                 }else{
-						int mot=-1;
-						int hai=-1;
-						int i;
-						int dem;int min=a[0];
-					for(i=0;i<n;i++){
 					
+						int dem;int min=a[0];
+					for(int i=0;i<n;i++){
 						if(a[i]<min){
 							dem=min;
 							min=a[i];
@@ -96,7 +117,23 @@ int main() {
 				}
                 break;
             }
-			case 5:{
+            case 6:{
+                if (n == 0) {
+                    printf("Mang chua duoc nhap! nhap lai\n");
+                }else{
+					
+						int dem;int max=a[0];
+					for(int i=0;i<n;i++){
+						if(a[i]>max){
+							dem=max;
+							max=a[i];
+						}
+					}
+					printf("gia tri lon thu 2 trong mang la:%d", dem);
+				}  	
+				break;
+			}
+			case 7:{
 			if(n==0){
 				printf("mang chua duoc nhap! nhap lai\n");
 			}else{
@@ -121,7 +158,7 @@ int main() {
          }
 				break;
 			}
-			case 6: {
+			case 8: {
 				if(n==0){
 					printf("mang chua duoc nhap ! nhap lai\n");
 				}else{
@@ -144,7 +181,7 @@ int main() {
 				}
 				break;
 			}
-			case 7:{
+			case 9:{
 				if(n==0){
 					printf("mang chua nhap gia tri ! nhap lai\n");
 				}else{
@@ -157,14 +194,34 @@ int main() {
 		}
 		a[j+1]=key;
 	}
-	printf("mang sau khi duoc xap xep la: ");
+	printf("mang sau khi duoc xap xep giam dan la: ");
     for(int i=n-1;i>=0;i--){
     	printf("%d ", a[i]);
 	}
 			}
 				break;
 			}
-			case 8:{
+			case 10:{
+				if(n==0){
+					printf("mang chua nhap gia tri ! nhap lai\n");
+				}else{
+				for(int i=1;i<n;i++){
+	        	int key=a[i];
+	         	int j=i-1;
+	        	while(j>=0&&key<a[j]){
+	     		a[j+1]=a[j];
+	    		j--;
+		}
+		        a[j+1]=key;
+	}
+	printf("mang sau khi duoc xap xep tang dan la: ");
+    for(int i=0;i<n;i++){
+    	printf("%d ", a[i]);
+	}
+}
+				break;
+			}
+			case 11:{
 				if(n==0){
 					printf("mang chua nhap gia tri ! nhap lai\n");
 				}else{
@@ -191,33 +248,75 @@ int main() {
 				printf("\nkhong tim thay phan tu nay trong mang");}
 				break;
 			}
-		    case 9:{
+		    case 12:{
 		    	if(n==0){
 				printf("mang chua nhap gia tri ! nhap lai\n");
 				}else{
-					
-				}
+                 for (int i = 0; i < n; i++) {
+                        for (int j = i + 1; j < n;) {
+                            if (a[i] == a[j]) {
+                                for (int k = j; k < n - 1; k++) {
+                                    a[k] = a[k + 1];
+                                }
+                                n--;
+                            } else {
+                                j++;
+                            }
+                        }
+                    }
+                    printf("Mang sau khi xoa cac phan tu trung lap: ");
+                    for (int i = 0; i < n; i++) {
+                        printf("%d ", a[i]);
+                    }
+                    printf("\n");
+				}	
 				break;
 			}
-			case 10:{
-				for(int i=0;i<1;i++){
-					for(int j=n-1;j>=i;j--){
-						int temp=a[i];
-						a[j]=a[i];
+			case 13:{
+		    if(n==0){
+		    	printf("mang chua duoc nhap!! moi nhap lai");
+			}else{
+				printf("mang duoc dao nguoc la: ");
+				for(int i=n-1;i>=0;i--){
+					printf(" %d",a[i]);
+				}
+			}
+				break;
+			}
+			case 14:{
+				if(n==0){
+					printf("mang chua duoc nhap!!moi nhap lai");
+				}else{
+					for(int i=0;i<n;i++){
+						int min=i;
+						for(int j=i+1;j<n;j++){
+							if(a[j]<a[min]){
+								min=j;
+							}
+						}
+						int temp=a[min];
+						a[min]=a[i];
 						a[i]=temp;
-						i++;
-						if(i==j){
-							break;
+					}
+					printf("mang sau khi duoc xap xep la: ");
+					for(int i=0;i<n;i++){
+						printf("%d ",a[i]);
+					}
+					printf("\nmang xap xep so chan dung truoc so le dung sau: ");
+					for(int i=0;i<n;i++){
+						if(a[i]%2==0){
+							printf("%d ",a[i]);
+						}
+					}
+					for(int i=0;i<n;i++){
+						if(a[i]%2!=0){
+							printf(" %d ",a[i]);
 						}
 					}
 				}
-				printf("mang sau khi duoc dao lai la: ");
-				for(int i=0;i<n;i++){
-					printf("%d ",a[i]);
-				}
 				break;
 			}
-            case 11:{
+            case 15:{
                 printf("da thoat chuong trinh\n");
                 return 0;
             }
@@ -228,5 +327,6 @@ int main() {
             }
         }
     }
+}
 			return 0;
     }
